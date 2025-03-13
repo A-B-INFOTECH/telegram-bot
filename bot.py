@@ -47,7 +47,7 @@ def save_data(user_id, user_name, user_username, role, message):
         file.write(f"{role}: {message}\n\n")
     push_to_github()  # Automatically push updates to GitHub
 
-GIT_REPO_PATH = "/path/to/your/repo"  # Update with your GitHub repository path
+GIT_REPO_PATH = "https://github.com/A-B-INFOTECH/telegram-bot.git"  # Update with your GitHub repository path
 
 def push_to_github():
     try:
