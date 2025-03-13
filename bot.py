@@ -53,7 +53,7 @@ def push_to_github():
     try:
         subprocess.run(["git", "-C", GIT_REPO_PATH, "add", "chat_history.txt"], check=True)
         subprocess.run(["git", "-C", GIT_REPO_PATH, "commit", "-m", "Updated chat history"], check=True)
-        subprocess.run(["git", "-C", GIT_REPO_PATH, "push", "https://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@github.com/A-B-INFOTECH/telegram-bot.git", "main"], check=True)  # Change "main" if your branch is different
+        subprocess.run(["git", "-C", GIT_REPO_PATH, "push", "origin", "main"], check=True)  # Change "main" if your branch is different
     except subprocess.CalledProcessError as e:
         print(f"Git push failed: {e}")
 # Log messages for debugging
