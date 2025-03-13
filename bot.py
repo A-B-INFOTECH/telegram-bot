@@ -1,5 +1,8 @@
 import time
 import google.generativeai as genai
+import os
+if not os.path.exists(CHAT_HISTORY_FILE):
+    open(CHAT_HISTORY_FILE, "w").close()
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackContext, CallbackQueryHandler, MessageHandler, filters
 from datetime import datetime
@@ -33,11 +36,13 @@ CHAT_HISTORY_FILE = "chat_history.txt"
 
 # Save chat history with timestamp
 def save_data(user_id, user_name, user_username, role, message):
-    timestamp = datetime.now().strftime("%Y-%m-%d")
-    with open(CHAT_HISTORY_FILE, "a", encoding="utf-8") as file:
-        file.write(f"[{timestamp}] User: {user_name} (@{user_username}) [{user_id}]\n")
-        file.write(f"{role}: {message}\n\n")
-
+    try:
+        timestamp = datetime.now().strftime("%Y-%m-%d")
+        with open(CHAT_HISTORY_FILE, "a", encoding="utf-8") as file:
+            file.write(f"[{timestamp}] User: {user_name} (@{user_username}) [{user_id}]\n")
+            file.write(f"{role}: {message}\n\n")
+    except Exception as e:
+        print(f"Error saving chat history: {e}")
 # Log messages for debugging
 def log_message(user, role, message):
     # print(f"[{role.upper()}] {user.full_name} (@{user.username}): {message}")
